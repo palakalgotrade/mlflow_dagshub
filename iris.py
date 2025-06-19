@@ -58,9 +58,9 @@ with mlflow.start_run():
     ## log code
     mlflow.log_artifact(__file__)
 
-    signature = infer_signature(X_train, dt.predict(X_train))      
+    
     ## log model
-    mlflow.sklearn.log_model(dt,name = "decision_tree",input_example=X_train[:5] , signature= signature)
+    mlflow.sklearn.log_model(dt,name = "decision_tree")
     ## generic model # but the specific sklearn model gets some more data about meta data
     #mlflow.load_model(dt,"decision_tree")
 
