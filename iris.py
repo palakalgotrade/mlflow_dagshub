@@ -1,4 +1,5 @@
 import mlflow.artifacts
+import mlflow.sklearn
 import pandas as pd
 from  sklearn.datasets import load_iris
 import mlflow
@@ -30,7 +31,7 @@ max_depth = 3
 mlflow.set_experiment('train_dt')
 
 with mlflow.start_run():
-    dt = DecisionTreeClassifier( random_state= 42 , max_depth=max_depth )
+    dt = DecisionTreeClassifier( max_depth=max_depth )
     dt.fit(X_train,y_trian)
     y_pred = dt.predict(X_test)
 
@@ -57,10 +58,11 @@ with mlflow.start_run():
     
     ## log code
     mlflow.log_artifact(__file__)
-
+    signature = infer_signature(X_train , dt.predict(X_train))
     
     ## log model
-    mlflow.sklearn.log_model(dt,name = "decision_tree")
+    mlflow.sklearn.log_model(dt,"decision tree",signature=signature)
+
     ## generic model # but the specific sklearn model gets some more data about meta data
     #mlflow.load_model(dt,"decision_tree")
 
