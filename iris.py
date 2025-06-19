@@ -11,7 +11,11 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # print(mlflow.get_tracking_uri())
-mlflow.set_tracking_uri('http://localhost:5000')
+import dagshub
+dagshub.init(repo_owner='palakalgotrade', repo_name='mlflow_dagshub', mlflow=True)
+
+mlflow.set_tracking_uri( 'https://dagshub.com/palakalgotrade/mlflow_dagshub.mlflow' )
+
 
 iris = load_iris()
 X = iris.data
