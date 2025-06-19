@@ -1,5 +1,6 @@
 import mlflow.artifacts
 import mlflow.sklearn
+import mlflow.sklearn
 import pandas as pd
 from  sklearn.datasets import load_iris
 import mlflow
@@ -61,7 +62,8 @@ with mlflow.start_run():
     signature = infer_signature(X_train , dt.predict(X_train))
     
     ## log model
-    mlflow.sklearn.log_model(dt,"decision tree",signature=signature)
+    mlflow.sklearn.log_model(dt, "decision tree")
+
 
     ## generic model # but the specific sklearn model gets some more data about meta data
     #mlflow.load_model(dt,"decision_tree")
@@ -71,4 +73,5 @@ with mlflow.start_run():
     mlflow.set_tag('author','palak')
     mlflow.set_tag('experiment','IRIS_dataset')
     mlflow.set_tag('model','decision tree')
+    
     
